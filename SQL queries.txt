@@ -1,0 +1,284 @@
+1) Create table student and Exam
+
+CREATE TABLE Student
+(
+    Rollno int PRIMARY KEY,
+    Name varchar(30),
+    Branch varchar(30)
+)
+Insrection value in table
+INSERT INTO student(Rollno,Name,Branch) VALUES (1,"Jay","Computer Science");
+INSERT INTO student(Rollno,Name,Branch) VALUES (2,"Suhani","Electronic and Com");
+INSERT INTO student(Rollno,Name,Branch) VALUES (3,"Kriti","Electronic and Com");
+
+CREATE TABLE Exam
+(
+     s_code varchar(30),
+     marks int,
+     p_code varchar(30),
+     
+     Rollno_fk int,
+     FOREIGN KEY student(Rollno_fk) REFERENCES student(Rollno)
+)
+Insrection value in table
+INSERT INTO exam(s_code,marks,p_code,Rollno_fk) VALUES ("CS11",50,"CS",1);
+INSERT INTO exam(s_code,marks,p_code,Rollno_fk) VALUES ("CS12",60,"CS",1);
+INSERT INTO exam(s_code,marks,p_code,Rollno_fk) VALUES ("EC101",66,"EC",2);
+INSERT INTO exam(s_code,marks,p_code,Rollno_fk) VALUES ("EC102",70,"EC",2);
+INSERT INTO exam(s_code,marks,p_code,Rollno_fk) VALUES ("EC101",45,"EC",3);
+INSERT INTO exam(s_code,marks,p_code,Rollno_fk) VALUES ("EC102",50,"EC",3);
+
+2) Create table given below: Employee and Incentive Table
+
+CREATE TABLE Employee
+(
+    Employee_id int,
+    First_name varchar(30),
+    Last_name varchar(30),
+    Salary varchar(30),
+    Joining_date varchar(30),
+    Department varchar(30)
+)
+Inserction value in table
+INSERT INTO employee(Employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES (1,"John","Abraham",1000000,01/JAN/13 12.00.00 AM,"Banking")
+INSERT INTO employee(Employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES (2,"Micheal","Clarke",800000,01/JAN/13 12.00.00 AM,"Insurance")
+INSERT INTO employee(Employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES (3,"Roy","Thomas",700000,01/FEB/13 12.00.00 AM,"Banking")
+INSERT INTO employee(Employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES (4,"Tom","Jose",600000,01/FEB/13 12.00.00 AM,"Insurance")
+INSERT INTO employee(Employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES (5,"Jerry","Pinto",650000,01/FEB/13 12.00.00 AM,"Insurance")
+INSERT INTO employee(Employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES (6,"Philip","Mathew",750000,01/Jan/13 12.00.00 AM,"Services")
+INSERT INTO employee(Employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES (7,"TestName1","123",650000,01/Jan/13 12.00.00 AM,"Services")
+INSERT INTO employee(Employee_id,First_name,Last_name,Salary,Joining_date,Department) VALUES (8,"TestName2","Lname%",600000,01/FEB/13 12.00.00 AM,"Insurance")
+
+CREATE TABLE Incentive
+
+CREATE TABLE Incentive
+(
+    Employee_ref_id int,
+    Incentive_date varchar(30),
+    Incentive_amount int
+)
+
+Inserction value in table
+
+INSERT INTO incentive (Employee_ref_id,Incentive_date,Incentive_amount) VALUES (1,"01/FEB/13",5000);
+INSERT INTO incentive (Employee_ref_id,Incentive_date,Incentive_amount) VALUES (2,"01/FEB/13",3000);
+INSERT INTO incentive (Employee_ref_id,Incentive_date,Incentive_amount) VALUES (3,"01/FEB/13",4000);
+INSERT INTO incentive (Employee_ref_id,Incentive_date,Incentive_amount) VALUES (1,"01/JAN/13",4500);
+INSERT INTO incentive (Employee_ref_id,Incentive_date,Incentive_amount) VALUES (2,"01/JAN/13",3500)
+
+3) SELECT * FROM employee WHERE First_name="Tom"
+
+4) SELECT First_name,Joining_date,Salary FROM employee
+
+5) SELECT * FROM employee ORDER BY First_name ASC
+	SELECT * FROM employee ORDER BY Salary DESC
+
+6) SELECT * FROM employee WHERE First_name LIKE "J%"
+
+7) SELECT * FROM employee Department ORDER BY Salary DESC
+
+8) SELECT * FROM employee ORDER BY Salary ASC
+
+9) CREATE TABLE viewtable
+(
+    id int,
+    name varchar(30),
+    salary int,
+    department varchar(30),
+    action_performed varchar(30)
+)
+
+DELIMITER $$
+CREATE TRIGGER insert_triger AFTER INSERT ON employee_sq FOR EACH ROW
+
+BEGIN
+ 
+INSERT INTO viewtable(id,name,salary,department,action_performed) 
+VALUES(new.employee_id,new.first_name,new.salary,new.deparment,"record inserted");
+ 
+ 
+END
+
+
+SQL Query 3:
+TABLE 1:- Salesperson
+
+  CREATE TABLE salesperson
+(
+    SNO  int PRIMARY KEY AUTO_INCREMENT ,
+    SNAME varchar(30),
+    CITY varchar(30),
+    COMM int 
+  )
+  
+--->insertion of value in table:--
+  INSERT INTO salesperson(SNO,SNAME,CITY,COMM) 
+ VALUES(1001,"peel","london",.12);
+  INSERT INTO salesperson(SNO,SNAME,CITY,COMM) 
+ VALUES(1002,"serres","san jose",.13);
+  INSERT INTO salesperson(SNO,SNAME,CITY,COMM) 
+ VALUES(1003,"motika","london",.11);
+  INSERT INTO salesperson(SNO,SNAME,CITY,COMM) 
+ VALUES(1004,"rafkin","barcelona",.15);
+  INSERT INTO salesperson(SNO,SNAME,CITY,COMM) 
+ VALUES(1007,"axeirod","New york",.1);
+-----------------------------------------------------------------------------------------------------
+ 
+TABLE 2: CUSTOMER
+   CREATE TABLE customer
+ (
+     CNN int,
+     CNAME varchar(30),
+     CITY varchar(30),
+     RATING int,
+   
+     SNO_fk int,
+     FOREIGN KEY salesperson(SNO_fk) REFERENCES salesperson(SNO)
+     )
+insertion of value in table :-
+   INSERT INTO customer(CNN,CNAME,CITY,RATING,SNO_fk)
+ VALUES(201,"hoffman","london",100,1001);
+ INSERT INTO customer(CNN,CNAME,CITY,RATING,SNO_fk)
+ VALUES(202,"giovanne","roe",200,1003);
+ INSERT INTO customer(CNN,CNAME,CITY,RATING,SNO_fk)
+ VALUES(203,"liu","san jose",300,1002);
+ INSERT INTO customer(CNN,CNAME,CITY,RATING,SNO_fk)
+ VALUES(204,"grass","barcelona",100,1002);
+ INSERT INTO customer(CNN,CNAME,CITY,RATING,SNO_fk)
+ VALUES(206,"clemens","london",300,1007);
+ INSERT INTO customer(CNN,CNAME,CITY,RATING,SNO_fk)
+ VALUES(207,"pereria","roe",100,1004);
+
+------------------------------------------------------------------------------------
+-->(13)   Select *  from salesperson where SNO > 1000; 
+-->(14)  Select SNAME, CITY from salesperson WHERE COMM < 0.12 and CITY = "london";
+-->(15) Select SNAME,CITY FROM salesperson WHERE CITY IN("barcelona","london"); 
+-->(16)  SELECT SNAME,COMM FROM salesperson WHERE COMM > 0.10 AND COMM<0.12
+-->(17)   SELECT CNAME FROM customer WHERE RATING<=100 AND CITY="roe"
+
+
+ Q.18)TABLE :- SALESPEOPLE
+
+   CREATE TABLE salespeople
+ (
+     salesmanid int PRIMARY KEY AUTO_INCREMENT,
+     name varchar(30),
+     city varchar(30),
+     commission float
+     )
+-->INSERTION VALUE IN TABLE
+
+  INSERT INTO salespeople(salesmanid,name,city,commission)
+VALUES(5001,"james hoog","new york",0.15);
+INSERT INTO salespeople(salesmanid,name,city,commission)
+VALUES(5002,"nail knite","paris",0.13);
+INSERT INTO salespeople(salesmanid,name,city,commission)
+VALUES(5005,"peet alex","london",.11);
+INSERT INTO salespeople(salesmanid,name,city,commission)
+VALUES(5006,"mc liyon","paris",.14);
+INSERT INTO salespeople(salesmanid,name,city,commission)
+VALUES(5007,"paul adam","rome",.13);
+INSERT INTO salespeople(salesmanid,name,city,commission)
+VALUES(5003,"lausan hen","san jose",.12);
+
+SQL statement :- SELECT * FROM salespeople
+---------------------------------------------------------------------------------
+Q.19)TABLE:- SAMPLETABLE -ORDER
+   
+     CREATE TABLE sample_order
+ (
+     order_no int PRIMARY KEY AUTO_INCREMENT,
+     purch_amt float,
+     ord_date date,
+     customer_id int,
+     
+     salesmanid_fk int,
+     FOREIGN KEY salespeople(salesmanid_fk) REFERENCES salespeople(salesmanid)
+     )
+
+SQL statement :-  SELECT  order_no,ord_date,purch_amt FROM sample_order WHERE salesmanid_fk=5001
+
+-------------------------------------------------------------------------------------------------------------------------
+Q.20)TABLE :- ITEM_MAST
+   
+        CREATE TABLE item_mast
+ (
+     pro_id int PRIMARY KEY AUTO_INCREMENT,
+     pro_name varchar(30),
+     pro_price float,
+     pro_com int 
+   )
+
+--->insertion of value in table:-
+  INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(101,"mother board",3200.00,15);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(102,"key board",450.00,16);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(103,"zip drive",250.00,14);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(104,"speaker",550.00,16);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(105,"moniter",5000.00,11);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(106,"DVD drive",900.00,12);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(107,"CD drive",800.00,12);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(108,"printer",2600.00,13);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(109,"refill cartridge",350.00,13);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(110,"mouse",250.00,12);
+ 
+----SQL query:-  SELECT * FROM item_mast WHERE pro_price BETWEEN 200 AND 600
+
+
+
+
+Q.21)TABLE :- ITEM_MAST
+   
+        CREATE TABLE item_mast
+ (
+     pro_id int PRIMARY KEY AUTO_INCREMENT,
+     pro_name varchar(30),
+     pro_price float,
+     pro_com int 
+   )
+
+--->insertion of value in table:-
+  INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(101,"mother board",3200.00,15);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(102,"key board",450.00,16);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(103,"zip drive",250.00,14);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(104,"speaker",550.00,16);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(105,"moniter",5000.00,11);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(106,"DVD drive",900.00,12);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(107,"CD drive",800.00,12);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(108,"printer",2600.00,13);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(109,"refill cartridge",350.00,13);
+ INSERT INTO item_mast(pro_id,pro_name,pro_price,pro_com)
+ VALUES(110,"mouse",250.00,12);
+ 
+----SQL query:-  SELECT AVG(pro_price) FROM item_mast WHERE pro_com=16
+-------------------------------------------------------------------------------------
+Q.22)
+   SQL query:- SELECT pro_name AS "item name", pro_price AS "price in Rs" FROM item_mast
+
+--------------------------------------------------------------------------------------
+Q.23)
+   SQL query:-   SELECT pro_name,pro_price FROM item_mast WHERE pro_price >= 250
+ ORDER BY pro_price DESC ,pro_name ASC
+
+---------------------------------------------------------------------------------------------
+Q.24)
+   SQL query:-   SELECT AVG(pro_price),pro_com FROM item_mast GROUP BY pro_com
+---------------------------------------------------------------------------------------------
